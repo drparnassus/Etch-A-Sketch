@@ -27,7 +27,7 @@ body {
 }
    
 .cell {
-    border: 1px solid rgb(92, 92, 92, .1);
+    border: 0px solid rgb(92, 92, 92, .1);
 }
 
 #inputBox {
