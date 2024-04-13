@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etch-a-Sketch</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etch-a-Sketch</title>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <input type="range" id="gridSizeInput" min="16" max="100" value="16">
-    <span id="gridSizeValue">16</span>
-    <div id="mainContainer"></div>
-    <script src="script.js"></script>
+
+    <div>
+        <input type="range" id="red" min="0" max="255" value="0">
+        <input type="range" id="green" min="0" max="255" value="0">
+        <input type="range" id="blue" min="0" max="255" value="0">
+    </div>
+    
+    <div id="colorPreview"></div>
+
+    <div id = "inputBox">
+        <div id = "sliderBox">
+            <span>16</span>
+            <input type="range" min="16" max="100" value="16" id="rangeInput">
+            <span>100</span>
+        </div>    
+        <span id = "rangeDisplay">16</span> 
+    </div>
+
+    <div id = "etchPad">
+    </div>
+
 </body>
+
 </html>

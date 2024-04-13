@@ -6,25 +6,49 @@
 
 body {
     display: flex;
-    flex-direction: row;
-    justify-content:  auto;
-}
-
-#mainContainer {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.cell {
-    background-color: white;
-    border: 1px solid black; /* Border around each cell */
-}
-
-#gridSizeValue {
+    flex-direction: column;
     align-items: center;
-    margin: auto;
+    justify-content: space-around;
+    height: 100vh;
+}
+  
+#etchPad {
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+    width: 700px;
+    border: 1px solid black;
+    box-shadow: 7px 7px 5px 1px rgb(92, 92, 92, .2);
+}
+  
+.row, .cell {
+    display: flex;
+    flex: 1;
+}
+   
+.cell {
+    border: 1px solid rgb(92, 92, 92, .1);
 }
 
-#gridSizeInput {
+#inputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#rangeDisplay {
+    border: 0px solid black;
+}
+
+input[type="range"] {
+    width: 200px;
     margin: 10px;
+}
+#colorPreview {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 1px solid black;
 }
