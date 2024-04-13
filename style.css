@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content:  auto;
+}
+
+#mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell {
+    background-color: white;
+    border: 1px solid black; /* Border around each cell */
+}
+
+#gridSizeValue {
+    align-items: center;
+    margin: auto;
+}
+
+#gridSizeInput {
+    margin: 10px;
+}
