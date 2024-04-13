@@ -1,6 +1,9 @@
 const etchPad = document.getElementById("etchPad");
 const inputVal = document.getElementById("rangeInput");
 const rangeDisplay = document.getElementById("rangeDisplay");
+const redDisplay = document.getElementById("redDisplay");
+const greenDisplay = document.getElementById("greenDisplay");
+const blueDisplay = document.getElementById("blueDisplay");
 
 function myFunction(num) {
     newGrid(num);
@@ -61,6 +64,10 @@ function updateColorPreview() {
 
     var colorPreview = document.getElementById('colorPreview');
     colorPreview.style.backgroundColor = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
+
+    document.getElementById('redDisplay').textContent = 'R: ' + redValue.padStart(3, '0');
+    document.getElementById('greenDisplay').textContent = 'G: ' + greenValue.padStart(3, '0');
+    document.getElementById('blueDisplay').textContent = 'B: ' + blueValue.padStart(3, '0');
 }
 
 document.getElementById('red').addEventListener('input', updateColorPreview);
