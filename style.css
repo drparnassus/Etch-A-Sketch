@@ -20,8 +20,9 @@ body {
     height: 700px;
     width: 700px;
     border: 1px solid #7E354D;
-    /*box-shadow: 7px 7px 5px 1px rgb(92, 92, 92, .2);
-*/}
+    box-shadow: 0px 0px 50px 0px #7E354D;
+    background-color: white;
+}
   
 .row, .cell {
     display: flex;
@@ -53,4 +54,11 @@ input[type="range"] {
     height: 100px;
     margin: 10px;
     border: 1px solid #7E354D;
+}
+
+@media (max-width: 768px) {
+    #etchPad {
+        height: 300px; 
+        width: 300px;
+    }
 }

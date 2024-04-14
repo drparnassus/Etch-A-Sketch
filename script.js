@@ -44,6 +44,30 @@ function updateColorPreview() {
     document.getElementById('blueDisplay').textContent = 'B: ' + blueValue.padStart(3, '0');
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var rangeInput = document.getElementById('rangeInput');
+    var rangeMaxSpan = document.getElementById('rangeMax');
+
+    // Function to adjust range input attributes and max text based on screen size
+    function adjustRangeElements() {
+        if (window.innerWidth <= 768) {
+            rangeInput.setAttribute('min', '16');
+            rangeInput.setAttribute('max', '50');
+            rangeMaxSpan.textContent = '50';
+        } else {
+            rangeInput.setAttribute('min', '16');
+            rangeInput.setAttribute('max', '100');
+            rangeMaxSpan.textContent = '100';
+        }
+    }
+
+    // Call the function initially
+    adjustRangeElements();
+
+    // Listen for window resize events and adjust range input and max text accordingly
+    window.addEventListener('resize', adjustRangeElements);
+});
+
 document.addEventListener('mouseup', function() {
     drawActive = false;
 });
