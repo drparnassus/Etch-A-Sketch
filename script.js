@@ -47,25 +47,38 @@ function updateColorPreview() {
 document.addEventListener('DOMContentLoaded', function() {
     var rangeInput = document.getElementById('rangeInput');
     var rangeMaxSpan = document.getElementById('rangeMax');
+    var redSlider = document.getElementById('red');
+    var greenSlider = document.getElementById('green');
+    var blueSlider = document.getElementById('blue');
+    var isSmallScreen = false;
 
-    // Function to adjust range input attributes and max text based on screen size
-    function adjustRangeElements() {
-        if (window.innerWidth <= 768) {
-            rangeInput.setAttribute('min', '16');
-            rangeInput.setAttribute('max', '50');
-            rangeMaxSpan.textContent = '50';
+    function adjustElements() {
+        if (window.innerWidth <= 810) {
+            if (!isSmallScreen) {
+                isSmallScreen = true;
+                rangeInput.setAttribute('min', '16');
+                rangeInput.setAttribute('max', '50');
+                rangeMaxSpan.textContent = '50';
+                redSlider.style.width = '75px';
+                greenSlider.style.width = '75px';
+                blueSlider.style.width = '75px';
+            }
         } else {
-            rangeInput.setAttribute('min', '16');
-            rangeInput.setAttribute('max', '100');
-            rangeMaxSpan.textContent = '100';
+            if (isSmallScreen) {
+                isSmallScreen = false;
+                rangeInput.setAttribute('min', '16');
+                rangeInput.setAttribute('max', '100');
+                rangeMaxSpan.textContent = '100';
+                redSlider.style.width = '200px';
+                greenSlider.style.width = '200px';
+                blueSlider.style.width = '200px';
+            }
         }
     }
 
-    // Call the function initially
-    adjustRangeElements();
+    adjustElements();
 
-    // Listen for window resize events and adjust range input and max text accordingly
-    window.addEventListener('resize', adjustRangeElements);
+    window.addEventListener('resize', adjustElements);
 });
 
 document.addEventListener('mouseup', function() {
