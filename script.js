@@ -4,8 +4,22 @@ const rangeDisplay = document.getElementById("rangeDisplay");
 const redDisplay = document.getElementById("redDisplay");
 const greenDisplay = document.getElementById("greenDisplay");
 const blueDisplay = document.getElementById("blueDisplay");
+const toggleButton = document.getElementById("toggleButton");
 let drawActive = false;
 let colorChoice = "black";
+let borderStyleOn = true;
+
+
+
+
+
+function toggleBorderStyle() {
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+        cell.classList.toggle('borderToggle');
+    });
+    borderStyleOn = !borderStyleOn;
+}
 
 function gridMaker(num) {
     newGrid(num);
@@ -43,6 +57,15 @@ function updateColorPreview() {
     document.getElementById('greenDisplay').textContent = 'G: ' + greenValue.padStart(3, '0');
     document.getElementById('blueDisplay').textContent = 'B: ' + blueValue.padStart(3, '0');
 }
+
+toggleButton.addEventListener('click', toggleBorderStyle);
+
+document.addEventListener("DOMContentLoaded", function() {
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+        cell.classList.add('borderToggle');
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     var rangeInput = document.getElementById('rangeInput');
