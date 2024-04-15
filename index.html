@@ -6,9 +6,6 @@
   <title>Etch-a-Sketch</title>
   <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
-
 </head>
 
 <body>
@@ -23,8 +20,8 @@
 
             <div id = "toolbox">
                 <button id="toggleButton"><img src = "./images/grid.png"></button>
-                <button id="showWheel">00</button>
                 <button id="showColorBox"><img src = "./images/rgbChoice.png"></button>
+                <button id="showWheel">00</button>
                 <button>00</button>
                 <button>00</button>
                 <button>00</button>
@@ -36,11 +33,11 @@
             <div id = "toolboxDisplay">
                 <div id = "colorBox">
                     <span id = "redDisplay">R: 000</span>
-                    <input type="range" id="red" min="0" max="255" value="0">
+                    <input type="range" id="red" class="custom-slider" min="0" max="255" value="0">
                     <span id = "greenDisplay">G: 000</span>
-                    <input type="range" id="green" min="0" max="255" value="0">
+                    <input type="range" id="green" class="custom-slider" min="0" max="255" value="0">
                     <span id = "blueDisplay">B: 000</span>
-                    <input type="range" id="blue" min="0" max="255" value="0">
+                    <input type="range" id="blue" class="custom-slider" min="0" max="255" value="0">
                     <div id="colorPreview"></div>
                 </div>
                 <div id = "wheelBox">
