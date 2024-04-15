@@ -8,10 +8,32 @@ const toggleButton = document.getElementById("toggleButton");
 let drawActive = false;
 let colorChoice = "black";
 let borderStyleOn = true;
+// Get references to the color box and wheel elements
+const colorBox = document.getElementById("colorBox");
+const wheelBox = document.getElementById("wheelBox");
 
+// Get references to the show buttons
+const showColorBoxButton = document.getElementById("showColorBox");
+const showWheelButton = document.getElementById("showWheel");
 
+// Function to hide color box and show color wheel
+function showColorWheel() {
+    colorBox.style.visibility = "hidden";
+    colorBox.style.display = "none";
+    wheelBox.style.visibility = "visible";
+    wheelBox.style.display = "flex";
+}
 
+// Function to hide color wheel and show color box
+function showColorBox() {
+    wheelBox.style.visibility = "hidden";
+    wheelBox.style.display = "none";
+    colorBox.style.visibility = "visible";
+    colorBox.style.display = "flex";
+}
 
+showColorBoxButton.addEventListener("click", showColorBox);
+showWheelButton.addEventListener("click", showColorWheel);
 
 function toggleBorderStyle() {
     const cells = document.querySelectorAll('.cell');
