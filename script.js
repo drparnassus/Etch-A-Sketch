@@ -9,6 +9,41 @@ let drawActive = false;
 let colorChoice = "black";
 let borderStyleOn = true;
 
+// Initialize variables to store RGB values
+let currentRed = document.getElementById('red').value;
+let currentGreen = document.getElementById('green').value;
+let currentBlue = document.getElementById('blue').value;
+
+// Function to update stored RGB values and color preview
+function updateColorPreview() {
+    currentRed = document.getElementById('red').value;
+    currentGreen = document.getElementById('green').value;
+    currentBlue = document.getElementById('blue').value;
+
+    // Update color preview
+    var colorPreview1 = document.getElementById('colorPreview'); // For the color preview in colorBox
+    var colorPreview2 = document.getElementById('colorPreviewWheel'); // For the color preview in wheelBox
+    var colorString = 'rgb(' + currentRed + ',' + currentGreen + ',' + currentBlue + ')';
+    colorPreview1.style.backgroundColor = colorString;
+    colorPreview2.style.backgroundColor = colorString;
+
+    // Update color display values
+    document.getElementById('redDisplay').textContent = 'R: ' + currentRed.padStart(3, '0');
+    document.getElementById('greenDisplay').textContent = 'G: ' + currentGreen.padStart(3, '0');
+    document.getElementById('blueDisplay').textContent = 'B: ' + currentBlue.padStart(3, '0');
+}
+
+// Function to color cell using stored RGB values
+function colorCell(event) {
+    event.target.style.backgroundColor = 'rgb(' + currentRed + ',' + currentGreen + ',' + currentBlue + ')';
+}
+
+// Event listeners to update stored RGB values when sliders are adjusted
+document.getElementById('red').addEventListener('input', updateColorPreview);
+document.getElementById('green').addEventListener('input', updateColorPreview);
+document.getElementById('blue').addEventListener('input', updateColorPreview);
+
+
 // Get references to the color box and wheel elements
 const colorBox = document.getElementById("colorBox");
 const wheelBox = document.getElementById("wheelBox");
@@ -72,26 +107,7 @@ function newGrid(num) {
     }
 }
 
-function colorCell(event) {
-    event.target.style.backgroundColor = 'rgb(' + document.getElementById('red').value + ',' + document.getElementById('green').value + ',' + document.getElementById('blue').value + ')';
-}
 
-function updateColorPreview() {
-    var redValue = document.getElementById('red').value;
-    var greenValue = document.getElementById('green').value;
-    var blueValue = document.getElementById('blue').value;
-
-    var colorPreview1 = document.getElementById('colorPreview'); // For the color preview in colorBox
-    var colorPreview2 = document.getElementById('colorPreviewWheel'); // For the color preview in wheelBox
-
-    var colorString = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
-    colorPreview1.style.backgroundColor = colorString;
-    colorPreview2.style.backgroundColor = colorString;
-
-    document.getElementById('redDisplay').textContent = 'R: ' + redValue.padStart(3, '0');
-    document.getElementById('greenDisplay').textContent = 'G: ' + greenValue.padStart(3, '0');
-    document.getElementById('blueDisplay').textContent = 'B: ' + blueValue.padStart(3, '0');
-}
 
 toggleButton.addEventListener('click', toggleBorderStyle);
 
