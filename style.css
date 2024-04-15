@@ -15,8 +15,10 @@
     src: url('./fonts/Bangers/Bangers-Regular.ttf') format('truetype');
 }
 
+
+
 .rainbowText {
-    background: -webkit-linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background: -webkit-linear-gradient(45deg, #ff0000,  #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
     background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
     -webkit-background-clip: text;
     background-clip: text; /* Standard property */
@@ -71,8 +73,13 @@ header {
     padding: 50px;
     align-content: space-between;
     justify-content: space-between;
-    border: 4px solid;
-    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+    box-shadow: 0 0 0 2px red,
+                0 0 0 4px orange,
+                0 0 0 6px yellow,
+                0 0 0 8px green,
+                0 0 0 10px blue,
+                0 0 0 12px indigo,
+                0 0 0 14px violet;
     border-radius: 10px;
 }
 
@@ -81,15 +88,21 @@ header {
     border: 0px solid white;
     width: 300px;
     height: 300px;
-    flex: 0, 0;
+    flex: 0 0;
     justify-content: center;
     align-items: center;
 }
 
 #toolboxDisplay {
-    border: 4px solid;
-    border-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red) 1;
-    border-radius: 10px;
+    border-width: 0px;
+    border-radius: 10%;
+    box-shadow: 0 0 0 2px red,
+                0 0 0 4px orange,
+                0 0 0 6px yellow,
+                0 0 0 8px green,
+                0 0 0 10px blue,
+                0 0 0 12px indigo,
+                0 0 0 14px violet;
 }
 
 #colorBox {
@@ -119,11 +132,16 @@ header {
 #options {
     width: 300px;
     height: 150px;
-    border: 4px solid;
-    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
     border-radius: 10px;
     font-size: 24px;
     font-weight: 700;
+    box-shadow: 0 0 0 2px red,
+                0 0 0 4px orange,
+                0 0 0 6px yellow,
+                0 0 0 8px green,
+                0 0 0 10px blue,
+                0 0 0 12px indigo,
+                0 0 0 14px violet;
 }
 
 #inputBox {
@@ -150,10 +168,16 @@ button {
     align-items: center;
 }
 
-#etchPad {
+#padContainer {
+    display: flex;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    box-shadow: 0px 0px 30px 40px rgba(238, 130, 238, .5);
+    border-radius: 10px;
+}
+
+#etchPad {
     display: flex;
     flex-direction: column;
     height: 700px;
