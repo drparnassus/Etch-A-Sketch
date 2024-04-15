@@ -8,6 +8,7 @@ const toggleButton = document.getElementById("toggleButton");
 let drawActive = false;
 let colorChoice = "black";
 let borderStyleOn = true;
+
 // Get references to the color box and wheel elements
 const colorBox = document.getElementById("colorBox");
 const wheelBox = document.getElementById("wheelBox");
@@ -45,7 +46,15 @@ function toggleBorderStyle() {
 
 function gridMaker(num) {
     newGrid(num);
+    // Apply the border style based on the state of the toggle
+    if (borderStyleOn) {
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach(cell => {
+            cell.classList.add('borderToggle');
+        });
+    }
 }
+
 
 function newGrid(num) {
     etchPad.innerHTML = "";
@@ -72,8 +81,12 @@ function updateColorPreview() {
     var greenValue = document.getElementById('green').value;
     var blueValue = document.getElementById('blue').value;
 
-    var colorPreview = document.getElementById('colorPreview');
-    colorPreview.style.backgroundColor = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
+    var colorPreview1 = document.getElementById('colorPreview'); // For the color preview in colorBox
+    var colorPreview2 = document.getElementById('colorPreviewWheel'); // For the color preview in wheelBox
+
+    var colorString = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
+    colorPreview1.style.backgroundColor = colorString;
+    colorPreview2.style.backgroundColor = colorString;
 
     document.getElementById('redDisplay').textContent = 'R: ' + redValue.padStart(3, '0');
     document.getElementById('greenDisplay').textContent = 'G: ' + greenValue.padStart(3, '0');
@@ -154,38 +167,3 @@ document.getElementById('blue').addEventListener('input', updateColorPreview);
 newGrid(16);
 
 updateColorPreview();
-
-
-
-
-/*
-
-// Get references to buttons and divs
-var button1 = document.getElementById('button1');
-var button2 = document.getElementById('button2');
-var button3 = document.getElementById('button3');
-var div1 = document.getElementById('div1');
-var div2 = document.getElementById('div2');
-var div3 = document.getElementById('div3');
-
-// Add event listeners to buttons
-button1.addEventListener('click', function() {
-    div1.style.display = 'block';
-    div2.style.display = 'none';
-    div3.style.display = 'none';
-});
-
-button2.addEventListener('click', function() {
-    div1.style.display = 'none';
-    div2.style.display = 'block';
-    div3.style.display = 'none';
-});
-
-button3.addEventListener('click', function() {
-    div1.style.display = 'none';
-    div2.style.display = 'none';
-    div3.style.display = 'block';
-});
-
-
-*/
