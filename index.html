@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Etch-a-Sketch</title>
-  <script src="script1.js" defer></script>
+  <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -31,39 +31,42 @@
             </div>
 
             <div id = "toolboxDisplay">
+
+                <div id = "colorBox">
+
+                    <span id = "redDisplay">R: 000</span>
+                    <input type="range" id="red" min="0" max="255" value="0">
+                    <span id = "greenDisplay">G: 000</span>
+                    <input type="range" id="green" min="0" max="255" value="0">
+                    <span id = "blueDisplay">B: 000</span>
+                    <input type="range" id="blue" min="0" max="255" value="0">
+
+                    <div id="colorPreview"></div>
+                </div>
             </div>
 
             <div id = "options">
+                <div id = "inputBox">
+                    <span id = "rangeDisplay">16</span> 
+                    <div id = "sliderBox">
+                        <span>16</span>
+                        <input type="range" min="16" max="100" value="16" id="rangeInput">
+                        <span id = "rangeMax">100</span>
+                    </div>    
+                </div>
             </div>
-
         </div>
 
+        <div id = "etchPad">
+        </div>
     </div>    
     
 <!--
-    <div>
-        <span id = "redDisplay">R: 000</span>
-        <input type="range" id="red" min="0" max="255" value="0">
-        <span id = "greenDisplay">G: 000</span>
-        <input type="range" id="green" min="0" max="255" value="0">
-        <span id = "blueDisplay">B: 000</span>
-        <input type="range" id="blue" min="0" max="255" value="0">
-    </div>
     
-    <div id="colorPreview"></div>
+    
+    
 
-    <div id = "inputBox">
-        <div id = "sliderBox">
-            <span>16</span>
-            <input type="range" min="16" max="100" value="16" id="rangeInput">
-            <span id = "rangeMax">100</span>
-        </div>    
-        <span id = "rangeDisplay">16</span> 
-    </div>
-
-    <div id = "etchPad">
-    </div>
-
+    
 -->   
 </body>
 

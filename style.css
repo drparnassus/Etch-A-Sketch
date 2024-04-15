@@ -10,6 +10,11 @@
     src: url('./fonts/dreamland/dreamlan.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'numbersFont';
+    src: url('./fonts/Bangers/Bangers-Regular.ttf') format('truetype');
+}
+
 .rainbowText {
     background: -webkit-linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
     background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
@@ -29,7 +34,7 @@ body {
 }
 
 header {
-    border: 1px solid #7E354D;
+    border: 0px solid #7E354D;
     text-align: center;
     padding: 10px;
     font-family: "headerFont", sans-serif;
@@ -40,18 +45,21 @@ header {
     display: flex;
     flex-direction: row;
     height: 100%;
+    align-items: center;
 }
 
 #sideBar {
     display: flex;
     flex-direction: column;
     flex: 0 0 350px;
-    border: 1px solid #7E354D;
+    border: 0px solid #7E354D;
     padding: 25px;
     height: 100%;
     align-items: center;
     gap: 25px;
     justify-content: space-around;
+    font-family: "numbersFont", sans-serif;
+    letter-spacing: 3px;
 }
 
 #toolbox {
@@ -63,22 +71,74 @@ header {
     padding: 50px;
     align-content: space-between;
     justify-content: space-between;
+    border: 4px solid;
+    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+    border-radius: 10px;
 }
 
 #toolboxDisplay, #options {
     display: flex;
-    justify-content: center;
-    align-content: center;
-    border: 1px solid white;
+    border: 0px solid white;
     width: 300px;
     height: 300px;
-    padding: 50px;
     flex: 0, 0;
+    justify-content: center;
+    align-items: center;
+}
+
+#toolboxDisplay {
+    border: 4px solid;
+    border-image: linear-gradient(45deg, violet, indigo, blue, green, yellow, orange, red) 1;
+    border-radius: 10px;
+}
+
+#colorBox {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+    flex: 0, 0;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#colorPreview {
+    display: flex;
+    flex: 0 0 auto;
+    width: 75px;
+    height: 75px;
+    border: 4px solid;
+    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+    border-radius: 10px;
+    align-self: center;
 }
 
 #options {
     width: 300px;
     height: 150px;
+    border: 4px solid;
+    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#inputBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0px solid #7E354D;
+    height: 100px;
+    justify-content: center;
+    gap: 10px;
+}
+
+#sliderBox {
+    display: flex;
+    gap: 10px;
 }
 
 button {
@@ -91,6 +151,9 @@ button {
 }
 
 #etchPad {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     height: 700px;
@@ -109,27 +172,12 @@ button {
     border: 1px solid rgb(92, 92, 92, .1);
 }
 
-#inputBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #7E354D;
-    padding: 3px;
-}
-
 #rangeDisplay {
     border: 0px solid #7E354D;
 }
 
 input[type="range"] {
     width: 200px;
-    margin: 10px;
-}
-#colorPreview {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    border: 1px solid #7E354D;
 }
 
 @media (max-width: 810px) {
