@@ -7,7 +7,7 @@ const blueDisplay = document.getElementById("blueDisplay");
 let drawActive = false;
 let colorChoice = "black";
 
-function myFunction(num) {
+function gridMaker(num) {
     newGrid(num);
 }
 
@@ -99,7 +99,7 @@ etchPad.addEventListener('mouseover', function(event) {
 
 inputVal.addEventListener("input", function() {
     rangeDisplay.textContent = inputVal.value;
-    myFunction(parseInt(rangeInput.value));
+    gridMaker(parseInt(rangeInput.value));
 });
 
 document.getElementById('red').addEventListener('input', updateColorPreview);
@@ -109,3 +109,38 @@ document.getElementById('blue').addEventListener('input', updateColorPreview);
 newGrid(16);
 
 updateColorPreview();
+
+
+
+
+/*
+
+// Get references to buttons and divs
+var button1 = document.getElementById('button1');
+var button2 = document.getElementById('button2');
+var button3 = document.getElementById('button3');
+var div1 = document.getElementById('div1');
+var div2 = document.getElementById('div2');
+var div3 = document.getElementById('div3');
+
+// Add event listeners to buttons
+button1.addEventListener('click', function() {
+    div1.style.display = 'block';
+    div2.style.display = 'none';
+    div3.style.display = 'none';
+});
+
+button2.addEventListener('click', function() {
+    div1.style.display = 'none';
+    div2.style.display = 'block';
+    div3.style.display = 'none';
+});
+
+button3.addEventListener('click', function() {
+    div1.style.display = 'none';
+    div2.style.display = 'none';
+    div3.style.display = 'block';
+});
+
+
+*/
