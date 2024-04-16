@@ -108,8 +108,6 @@ function updateRGBSlidersFromColorPicker() {
 
     colorPicker.addEventListener('input', function() {
         colorPickerUsed = true;
-        updateRGBSlidersFromColorPicker(); // Update RGB sliders with color picker values
-    // Update other elements as needed...
         const hexColor = colorPicker.value;
         const rgbColor = hexToRgb(hexColor);
         currentRed = rgbColor.r;
@@ -121,6 +119,7 @@ function updateRGBSlidersFromColorPicker() {
         colorPicker.dataset.green = currentGreen;
         colorPicker.dataset.blue = currentBlue;
         updateColorPreview();
+        updateRGBSlidersFromColorPicker();
     });
     
 
