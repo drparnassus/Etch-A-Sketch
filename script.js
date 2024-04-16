@@ -11,9 +11,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const colorDisplay = document.getElementById("colorDisplay");
     const deleteButton = document.getElementById("deleteButton");
     const colorSelectorPreview = document.getElementById("colorSelectorPreview");
+    const brushButton = document.getElementById("brush");
     let drawActive = false;
     let colorChoice = "black";
     let borderStyleOn = true;
+    let brushSize = 1;
+
+    brushButton.addEventListener('click', function() {
+        if (brushSize == 1) {
+            brushSize = 9;
+            brushButton.innerHTML = "<img src='./images/3x3.png' alt='Icon'>";
+        }
+        else if (brushSize == 9) {
+            brushSize = 1;
+            brushButton.innerHTML = "<img src='./images/1x1.png' alt='Icon'>";
+        }
+    });
 
     // Initialize variables to store RGB values
     let currentRed = document.getElementById('red').value;
@@ -81,9 +94,36 @@ function rgbToHex(r, g, b) {
     return '#' + redHex + greenHex + blueHex;
 }
     // Function to color cell using stored RGB values
-    function colorCell(event) {
-        event.target.style.backgroundColor = 'rgb(' + currentRed + ',' + currentGreen + ',' + currentBlue + ')';
+    function colorCell(event, brushSize) {
+        if (brushSize == 1) {
+            event.target.style.backgroundColor = 'rgb(' + currentRed + ',' + currentGreen + ',' + currentBlue + ')';
+        }
+        else {
+            const targetCell = event.target;
+    const cells = document.querySelectorAll('.cell');
+    
+    // Get the index of the target cell
+    const targetIndex = Array.from(cells).indexOf(targetCell);
+    const numRows = Math.sqrt(cells.length);
+    const targetRow = Math.floor(targetIndex / numRows);
+    const targetCol = targetIndex % numRows;
+
+    // Loop through the surrounding cells in a 3x3 grid
+    for (let i = targetRow - 1; i <= targetRow + 1; i++) {
+        for (let j = targetCol - 1; j <= targetCol + 1; j++) {
+            // Check if the current index is within the grid bounds
+            if (i >= 0 && i < numRows && j >= 0 && j < numRows) {
+                // Calculate the index of the current cell
+                const currentIndex = i * numRows + j;
+                const currentCell = cells[currentIndex];
+                // Color the current cell
+                currentCell.style.backgroundColor = 'rgb(' + currentRed + ',' + currentGreen + ',' + currentBlue + ')';
+            }
+        }
     }
+                        
+        }            
+        }
 
     // Function to update RGB sliders with color picker values
 function updateRGBSlidersFromColorPicker() {
@@ -261,12 +301,12 @@ function updateRGBSlidersFromColorPicker() {
     etchPad.addEventListener('mousedown', function(event) {
         event.preventDefault();
         drawActive = true;
-        colorCell(event);
+        colorCell(event, brushSize);
     });
 
     etchPad.addEventListener('mouseover', function(event) {
         if (drawActive && event.target.classList.contains("cell")) {
-            colorCell(event);
+            colorCell(event, brushSize);
         }
     });
 
