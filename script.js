@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const colorPicker = document.getElementById("colorPicker");
     const colorPreview = document.getElementById("colorPreview");
     const colorDisplay = document.getElementById("colorDisplay");
+    const deleteButton = document.getElementById("deleteButton");
     const colorSelectorPreview = document.getElementById("colorSelectorPreview");
     let drawActive = false;
     let colorChoice = "black";
@@ -21,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let colorPickerUsed = false; // Initialize a flag to track if color picker was used
 
+    function deleteGrid () {
+        etchPad.innerHTML = "";
+    }
 
     function updateColorPreview() {
         if (colorPickerUsed) {
@@ -47,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Hex color:", hexColor);
     
         // Update color picker value
+        //colorPicker.value = hexColor;
     
         // Update color display values
         colorDisplay.textContent = hexColor;
@@ -200,6 +205,11 @@ function updateRGBSlidersFromColorPicker() {
 
     toggleButton.addEventListener('click', toggleBorderStyle);
 
+    deleteButton.addEventListener('click', function() {
+        const currentSize = parseInt(rangeInput.value);
+        gridMaker(currentSize);
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
         const cells = document.querySelectorAll('.cell');
         cells.forEach(cell => {
@@ -264,6 +274,8 @@ function updateRGBSlidersFromColorPicker() {
         rangeDisplay.textContent = inputVal.value;
         gridMaker(parseInt(rangeInput.value));
     });
+
+    
 
     document.getElementById('red').addEventListener('input', updateColorPreview);
     document.getElementById('green').addEventListener('input', updateColorPreview);
