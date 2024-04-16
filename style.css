@@ -121,7 +121,7 @@ header {
     font-weight: 500;
 }
 
-#colorPreview, #colorPreviewWheel {
+#colorPreview, #colorPreviewWheel, #colorPicker {
     display: flex;
     flex: 0 0 auto;
     width: 75px;
@@ -256,8 +256,13 @@ input[type="range"]::-webkit-slider-thumb {
     }
 }
 
+
+
 #wheelBox {
     display: none;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
 }
 
 /* Red Slider */
@@ -272,3 +277,4 @@ input[type="range"]::-webkit-slider-thumb {
 #blue.custom-slider::-webkit-slider-runnable-track {
     background: linear-gradient(to right, black, blue); /* Red gradient */
 }
+
