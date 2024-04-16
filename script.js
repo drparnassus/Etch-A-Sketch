@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const colorPicker = document.getElementById("colorPicker");
     const colorPreview = document.getElementById("colorPreview");
     const colorDisplay = document.getElementById("colorDisplay");
+    const colorSelectorPreview = document.getElementById("colorSelectorPreview");
     let drawActive = false;
     let colorChoice = "black";
     let borderStyleOn = true;
@@ -46,10 +47,10 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Hex color:", hexColor);
     
         // Update color picker value
-        colorPicker.value = hexColor;
     
         // Update color display values
         colorDisplay.textContent = hexColor;
+        colorSelectorPreview.style.backgroundColor = colorString;
         redDisplay.textContent = 'R: ' + currentRed.toString().padStart(3, '0');
         greenDisplay.textContent = 'G: ' + currentGreen.toString().padStart(3, '0');
         blueDisplay.textContent = 'B: ' + currentBlue.toString().padStart(3, '0');
