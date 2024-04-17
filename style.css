@@ -321,5 +321,5 @@ input[type="color"] {
 
 /* Define CSS transitions for smoother color changes */
 .cell {
-    transition: background-color 0.5s ease; /* Adjust transition duration and timing function as needed */
+    transition: background-color 0.25s ease; /* Adjust transition duration and timing function as needed */
 }

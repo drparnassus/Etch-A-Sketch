@@ -17,52 +17,50 @@ document.addEventListener("DOMContentLoaded", function() {
     let brushSize = 1;
 
 
-// Function to start the disco mode animation
-function startDiscoMode() {
-    const cells = document.querySelectorAll('.cell');
-    const originalColors = []; // Array to store original colors
-    // Store the original color of each cell
-    cells.forEach(cell => {
-        originalColors.push(cell.style.backgroundColor || 'rgb(255,255,255)');
-    });
-
-    // Define threshold distance from black and white
-    const thresholdDistance = 50; // Adjust as needed
-
-    // Define an interval to update cell colors every second
-    discoInterval = setInterval(() => {
-        cells.forEach((cell, index) => {
-            // Get the original RGB color of the cell
-            const originalColor = originalColors[index].split(',').map(color => parseInt(color.replace(/\D/g,'')));
-
-            // Choose the RGB value to modify (either red, green, or blue)
-            const rgbToModifyIndex = Math.floor(Math.random() * 3); // 0 for red, 1 for green, 2 for blue
-            let newValue = Math.floor(Math.random() * 256); // Generate a random value for the chosen RGB component
-
-            // Adjust the range of possible values for the modified component
-            newValue = Math.max(0, Math.min(255, newValue)); // Ensure the value is within the valid range
-
-            // Check the proximity of the cell color to black or white
-            const distanceToBlack = originalColor.reduce((acc, cur) => acc + (cur < thresholdDistance ? 1 : 0), 0);
-            const distanceToWhite = originalColor.reduce((acc, cur) => acc + (cur > 255 - thresholdDistance ? 1 : 0), 0);
-
-            // Adjust the new value based on the proximity to black or white
-            if (distanceToBlack > 1 || distanceToWhite > 1) {
-                // For cells close to black or white, reduce the shift intensity further
-                newValue = Math.floor(newValue / 3); // Decrease the shift intensity
-            }
-
-            // Update the RGB color with the new value
-            originalColor[rgbToModifyIndex] = newValue; // Update the chosen RGB component
-
-            // Apply the new color to the cell with CSS transition
-            cell.style.transition = 'background-color 0.5s ease'; // Adjust transition duration and timing function as needed
-            cell.style.backgroundColor = `rgb(${originalColor.join(',')})`;
+    function startDiscoMode() {
+        let rngTuner = 200;
+        const cells = document.querySelectorAll('.cell');
+        const originalColors = []; // Array to store original colors
+        // Store the original color of each cell
+        cells.forEach(cell => {
+            originalColors.push(cell.style.backgroundColor || 'rgb(255,255,255)');
         });
-    }, 500); // Update cell colors every second
-}
-
-
+    
+        // Define threshold distance from black and white
+        const thresholdDistance = 50; // Adjust as needed
+    
+        // Define an interval to update cell colors every second
+        discoInterval = setInterval(() => {
+            cells.forEach((cell, index) => {
+                // Get the original RGB color of the cell
+                const originalColor = originalColors[index].split(',').map(color => parseInt(color.replace(/\D/g,'')));
+    
+                // Randomly decide which RGB component(s) to modify
+                let modifyRed = Math.random() < 0.5;
+                let modifyGreen = Math.random() < 0.5;
+                let modifyBlue = Math.random() < 0.5;
+    
+                // Apply different random changes to each modified component
+                if (modifyRed) {
+                    let redChange = Math.floor(Math.random() * 101) - rngTuner; // Generate random value between -50 and +50
+                    originalColor[0] = Math.max(0, Math.min(255, originalColor[0] + redChange)); // Ensure the value is within the valid range
+                }
+                if (modifyGreen) {
+                    let greenChange = Math.floor(Math.random() * 101) - rngTuner; // Generate random value between -50 and +50
+                    originalColor[1] = Math.max(0, Math.min(255, originalColor[1] + greenChange)); // Ensure the value is within the valid range
+                }
+                if (modifyBlue) {
+                    let blueChange = Math.floor(Math.random() * 101) - rngTuner; // Generate random value between -50 and +50
+                    originalColor[2] = Math.max(0, Math.min(255, originalColor[2] + blueChange)); // Ensure the value is within the valid range
+                }
+    
+                // Apply the new color to the cell with CSS transition
+                cell.style.transition = 'background-color 0.25s ease'; // Adjust transition duration and timing function as needed
+                cell.style.backgroundColor = `rgb(${originalColor.join(',')})`;
+            });
+        }, 333); // Update cell colors every second
+    }
+    
 
 
 
