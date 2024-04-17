@@ -13,9 +13,206 @@ document.addEventListener("DOMContentLoaded", function() {
     const colorSelectorPreview = document.getElementById("colorSelectorPreview");
     const brushButton = document.getElementById("brush");
     let drawActive = false;
-    let colorChoice = "black";
     let borderStyleOn = true;
     let brushSize = 1;
+
+
+// Function to start the disco mode animation
+function startDiscoMode() {
+    const cells = document.querySelectorAll('.cell');
+    const originalColors = []; // Array to store original colors
+    // Store the original color of each cell
+    cells.forEach(cell => {
+        originalColors.push(cell.style.backgroundColor || 'rgb(255,255,255)');
+    });
+
+    // Define threshold distance from black and white
+    const thresholdDistance = 50; // Adjust as needed
+
+    // Define an interval to update cell colors every second
+    discoInterval = setInterval(() => {
+        cells.forEach((cell, index) => {
+            // Get the original RGB color of the cell
+            const originalColor = originalColors[index].split(',').map(color => parseInt(color.replace(/\D/g,'')));
+
+            // Choose the RGB value to modify (either red, green, or blue)
+            const rgbToModifyIndex = Math.floor(Math.random() * 3); // 0 for red, 1 for green, 2 for blue
+            let newValue = Math.floor(Math.random() * 256); // Generate a random value for the chosen RGB component
+
+            // Adjust the range of possible values for the modified component
+            newValue = Math.max(0, Math.min(255, newValue)); // Ensure the value is within the valid range
+
+            // Check the proximity of the cell color to black or white
+            const distanceToBlack = originalColor.reduce((acc, cur) => acc + (cur < thresholdDistance ? 1 : 0), 0);
+            const distanceToWhite = originalColor.reduce((acc, cur) => acc + (cur > 255 - thresholdDistance ? 1 : 0), 0);
+
+            // Adjust the new value based on the proximity to black or white
+            if (distanceToBlack > 1 || distanceToWhite > 1) {
+                // For cells close to black or white, reduce the shift intensity further
+                newValue = Math.floor(newValue / 3); // Decrease the shift intensity
+            }
+
+            // Update the RGB color with the new value
+            originalColor[rgbToModifyIndex] = newValue; // Update the chosen RGB component
+
+            // Apply the new color to the cell with CSS transition
+            cell.style.transition = 'background-color 0.5s ease'; // Adjust transition duration and timing function as needed
+            cell.style.backgroundColor = `rgb(${originalColor.join(',')})`;
+        });
+    }, 500); // Update cell colors every second
+}
+
+
+
+
+
+
+ 
+// Function to convert HSL to RGB
+function hslToRgb(h, s, l) {
+    let r, g, b;
+
+    if (s === 0) {
+        r = g = b = l; // Achromatic
+    } else {
+        const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1/6) return p + (q - p) * 6 * t;
+            if (t < 1/2) return q;
+            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        };
+        
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+
+
+// Function to stop the disco mode animation
+function stopDiscoMode() {
+    clearInterval(discoInterval); // Clear the interval
+}
+
+// Event listener for the disco mode button
+const discoButton = document.getElementById('discoButton');
+let discoInterval = null;
+discoButton.addEventListener('click', function() {
+    // Toggle disco mode
+    if (discoInterval) {
+        stopDiscoMode();
+        discoInterval = null;
+        discoButton.textContent = 'Disco Mode';
+    } else {
+        startDiscoMode();
+        discoButton.textContent = 'Stop Disco';
+    }
+});
+
+
+
+
+
+
+
+
+
+// Function to save the drawing to local storage
+function saveDrawing() {
+    const cells = document.querySelectorAll('.cell');
+    const drawingData = [];
+    const numRows = Math.sqrt(cells.length); // Assuming it's a square grid
+
+    // Save dimensions as the first element in the drawing data
+    drawingData.push(numRows);
+
+    // Save the state of the toggle button
+    const toggleState = borderStyleOn; // Get the current toggle state
+    drawingData.push(toggleState);
+
+    cells.forEach(cell => {
+        const cellColor = cell.style.backgroundColor || 'rgb(255, 255, 255)';
+        drawingData.push(cellColor);
+    });
+
+    localStorage.setItem('drawing', JSON.stringify(drawingData));
+
+    // Log the correct toggle state
+    console.log("Toggle State:", toggleState);
+}
+
+
+
+
+    function loadBorderStyle() {
+        const cells = document.querySelectorAll('.cell');
+        cells.forEach(cell => {
+            cell.classList.toggle('borderToggle');
+        });
+    }
+    
+    
+
+// Function to load the drawing from local storage
+function loadDrawing() {
+    const drawingData = JSON.parse(localStorage.getItem('drawing'));
+
+    // Inside loadDrawing() function
+
+
+
+    if (!drawingData) {
+        console.error("No drawing data found in local storage.");
+        return;
+    }
+
+    const numRows = drawingData.shift();
+    const numCols = numRows; // Assuming it's a square grid
+
+    // Reconstruct the grid with the saved dimensions
+    newGrid(numRows);
+
+    // Restore the toggle button state after the grid is drawn
+const savedToggleState = drawingData.shift(); // Retrieve the saved toggle state
+if (savedToggleState !== borderStyleOn) {
+    toggleBorderStyle(); // Toggle the border style if it's different from the saved state
+}
+
+
+    console.log("Retrieved Toggle State:", savedToggleState);
+
+    const cells = document.querySelectorAll('.cell');
+
+    // Set background colors
+    cells.forEach((cell, index) => {
+        cell.style.backgroundColor = drawingData[index];
+    });
+
+    console.log("Number of rows:", numRows);
+    console.log("Number of columns:", numCols);
+}
+
+
+
+
+
+
+// Event listener for saving the drawing
+document.getElementById("saveButton").addEventListener("click", saveDrawing);
+
+// Event listener for loading the drawing
+document.getElementById("loadButton").addEventListener("click", loadDrawing);
+
+
+
+
 
     brushButton.addEventListener('click', function() {
         if (brushSize == 1) {
@@ -179,13 +376,17 @@ function updateRGBSlidersFromColorPicker() {
 
     const colorBox = document.getElementById("colorBox");
     const wheelBox = document.getElementById("wheelBox");
+    const saveLoadBox = document.getElementById("saveLoadWindow");
 
     const showColorBoxButton = document.getElementById("showColorBox");
     const showWheelButton = document.getElementById("showWheel");
+    const showSaveLoadButton = document.getElementById("showSaveLoad");
 
     function showColorWheel() {
         colorBox.style.visibility = "hidden";
         colorBox.style.display = "none";
+        saveLoadBox.style.visibility = "hidden";
+        saveLoadBox.style.display = "none";
         wheelBox.style.visibility = "visible";
         wheelBox.style.display = "flex";
     }
@@ -196,6 +397,8 @@ function updateRGBSlidersFromColorPicker() {
         currentGreen = parseInt(colorPicker.dataset.green);
         currentBlue = parseInt(colorPicker.dataset.blue);
         
+        saveLoadBox.style.visibility = "hidden";
+        saveLoadBox.style.display = "none";
         wheelBox.style.visibility = "hidden";
         wheelBox.style.display = "none";
         colorBox.style.visibility = "visible";
@@ -204,10 +407,20 @@ function updateRGBSlidersFromColorPicker() {
         // Update the color preview and other elements with the new RGB values
         updateColorPreview();
     }
+
+    function showSaveLoad() {
+        colorBox.style.visibility = "hidden";
+        colorBox.style.display = "none";
+        wheelBox.style.visibility = "hidden";
+        wheelBox.style.display = "none";
+        saveLoadBox.style.visibility = "visible";
+        saveLoadBox.style.display = "flex";
+    }
     
 
     showColorBoxButton.addEventListener("click", showColorBox);
     showWheelButton.addEventListener("click", showColorWheel);
+    showSaveLoadButton.addEventListener("click", showSaveLoad);
 
     function toggleBorderStyle() {
         const cells = document.querySelectorAll('.cell');
@@ -224,6 +437,22 @@ function updateRGBSlidersFromColorPicker() {
             cells.forEach(cell => {
                 cell.classList.add('borderToggle');
             });
+        }
+    }
+
+    function newGridLoader(num) {
+        etchPad.innerHTML = "";
+
+        for (let i = 1; i <= num; i++) {
+            const row = document.createElement('div');
+            row.className = "row";
+            etchPad.appendChild(row);
+
+            for (let j = 1; j <= num; j++) {
+                const cell = document.createElement('div');
+                cell.className = "cell";
+                row.appendChild(cell);
+            }
         }
     }
 

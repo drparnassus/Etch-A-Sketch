@@ -108,7 +108,7 @@ header {
     min-height: 300px;
 }
 
-#colorBox, #wheelBox {
+#colorBox, #wheelBox, #saveLoadWindow {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -212,6 +212,13 @@ button {
     height: 50px;
 }
 
+
+
+#showSaveLoad img {
+    width: 50px;
+    height: 50px;
+}
+
 #showWheel {
     overflow: hidden;
 }
@@ -295,6 +302,10 @@ input[type="color"] {
     justify-content: space-evenly;
 }
 
+#saveLoadWindow {
+    display: none;
+}
+
 /* Red Slider */
 #red.custom-slider::-webkit-slider-runnable-track {
     background: linear-gradient(to right, black, red); /* Red gradient */
@@ -308,3 +319,7 @@ input[type="color"] {
     background: linear-gradient(to right, black, blue); /* Red gradient */
 }
 
+/* Define CSS transitions for smoother color changes */
+.cell {
+    transition: background-color 0.5s ease; /* Adjust transition duration and timing function as needed */
+}
