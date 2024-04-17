@@ -55,10 +55,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
     
                 // Apply the new color to the cell with CSS transition
-                cell.style.transition = 'background-color 0.25s ease'; // Adjust transition duration and timing function as needed
+                cell.style.transition = 'background-color 0.5s ease'; // Adjust transition duration and timing function as needed
                 cell.style.backgroundColor = `rgb(${originalColor.join(',')})`;
             });
-        }, 333); // Update cell colors every second
+        }, 500); // Update cell colors every second
     }
     
 
